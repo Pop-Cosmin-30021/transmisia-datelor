@@ -3,10 +3,10 @@ var app = new Vue({
   data: {
     dataBits: [],
     status: '',
-    numberOfDataBits: 4
+    numberOfDataBits: 8
   },
   created: function () {
-    this.initDataBits(4);
+    this.initDataBits(8);
   },
   methods: {
     initDataBits: function () {
@@ -34,16 +34,32 @@ var app = new Vue({
       // This function must be changed to allow any number of data bits
       // Right now it only works for 4 data bits
       console.log(this.numberOfDataBits);
+      var c8 = this.parity(
+              parseInt(bits[4].data) + parseInt(bits[5].data) + parseInt(bits[6].data) + parseInt(bits[7].data)
+            );
       var c4 = this.parity(
-        parseInt(bits[1].data) + parseInt(bits[2].data) + parseInt(bits[3].data)
+        parseInt(bits[1].data) + parseInt(bits[2].data) + parseInt(bits[3].data) + parseInt(bits[7].data)
       );
       var c2 = this.parity(
-        parseInt(bits[0].data) + parseInt(bits[2].data) + parseInt(bits[3].data)
+        parseInt(bits[0].data) + parseInt(bits[2].data) + parseInt(bits[3].data) + parseInt(bits[5].data) + parseInt(bits[6].data)
       );
       var c1 = this.parity(
-        parseInt(bits[0].data) + parseInt(bits[1].data) + parseInt(bits[3].data)
+        parseInt(bits[0].data) + parseInt(bits[1].data) + parseInt(bits[3].data) + parseInt(bits[4].data) + parseInt(bits[6].data)
       );
-      console.log('Control bits: ' + c1 + ',' + c2 + ',' + c4);
+      console.log('Control bits: ' + c1 + ',' + c2 + ',' + c4 + ',' + c8);
+
+      console.log(' '+ c1+
+                          c2+
+                          parseInt(bits[0].data)+
+                          c4+
+                          parseInt(bits[1].data)+
+                          parseInt(bits[2].data)+
+                          parseInt(bits[3].data)+
+                          c8+
+                          parseInt(bits[4].data)+
+                          parseInt(bits[5].data)+
+                          parseInt(bits[6].data)+
+                          parseInt(bits[7].data));
       return [
         c1,
         c2,
@@ -51,7 +67,12 @@ var app = new Vue({
         c4,
         parseInt(bits[1].data),
         parseInt(bits[2].data),
-        parseInt(bits[3].data)
+        parseInt(bits[3].data),
+        c8,
+        parseInt(bits[4].data),
+        parseInt(bits[5].data),
+        parseInt(bits[6].data),
+        parseInt(bits[7].data)
       ];
     },
     parity: function (number) {
