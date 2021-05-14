@@ -14,6 +14,8 @@ const words = loadWords(filename);
 const codes = getCodes(words);
 var Parser = require("binary-parser").Parser;
 let { app } = require('./server-config');
+let axios = require('axios');
+
 
 function sendWord(word) {
     const binaryData = encodeOneWord(word, codes);
@@ -75,8 +77,6 @@ sendWord(' ');
 sendWord('\r\n'); //https://stackoverflow.com/questions/1761051/difference-between-n-and-r
 sendWord('because');
 sendWord('have');
-
-sendFromFile();
 
 sendText('give');
 sendText('this\r\nbecause');

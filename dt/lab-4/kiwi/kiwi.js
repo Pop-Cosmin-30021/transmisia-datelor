@@ -9,6 +9,7 @@ let {
   decodeOneWord,
   encodeOneWord
 } = require('../lib/lib');
+const timestamp = require('time-stamp');
 const orangeUrl = 'http://localhost:3002';
 const filename = '../lib/common-words.txt';
 const words = loadWords(filename);

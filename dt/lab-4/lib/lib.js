@@ -1,5 +1,3 @@
-const chalk = require('chalk');
-
 const fs = require('fs');
 const lib = require('bits-utils');
 
